@@ -1,0 +1,23 @@
+server:
+  port: 8999
+
+  eureka:
+    instance:
+      hostname: localhost
+
+
+      spring:
+        application:
+          name: api-gateway
+
+    cloud:
+      gateway:
+        routes:
+          - id: user_service
+            uri:  lb://user_service
+            predicate:
+             - path=/user/**
+          - id: contact_service
+            uri: lb://contact_service
+            predicate:
+             - path=/contact/**
